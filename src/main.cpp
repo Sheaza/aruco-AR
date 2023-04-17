@@ -1,19 +1,26 @@
 #include <opencv2/opencv.hpp>
 
-int main() {
-    // Load an image from file
-    cv::Mat image = cv::imread("sample.jpg");
+int main()
+{
+    // Load the input image
+    cv::Mat inputImage = cv::imread("sample.jpg");
 
-    // Check if the image was loaded successfully
-    if (image.empty()) {
-        std::cout << "Failed to load image" << std::endl;
-        return 1;
-    }
+    // Detect the markers in the input image
+    std::vector<int> markerIds;
+    std::vector<std::vector<cv::Point2f>> markerCorners, rejectedCandidates;
 
-    // Display the image in a window
-    cv::imshow("Image", image);
+    cv::aruco::DetectorParameters detectorParams = cv::aruco::DetectorParameters();
+    cv::aruco::Dictionary dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_50);
+    cv::aruco::ArucoDetector detector(dictionary, detectorParams); 
 
-    // Wait for a key press and then exit
+    detector.detectMarkers(inputImage, markerCorners, markerIds, rejectedCandidates);
+
+    //Draw the detected markers on the input image
+    cv::aruco::drawDetectedMarkers(inputImage, markerCorners, markerIds);
+    
+    // Display the output image
+    cv::imshow("Output Image", inputImage);
     cv::waitKey(0);
+
     return 0;
 }
