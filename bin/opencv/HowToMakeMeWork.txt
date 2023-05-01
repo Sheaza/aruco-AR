@@ -1,4 +1,0 @@
-By działało trzeba dodać do PATH następujące ścieżki:
-G:\Projects\Cpp\aruco-AR\bin\opencv\x64\vc17\bin
-G:\Projects\Cpp\aruco-AR\bin\opencv\x64\vc17\lib
-Następnie zrestartować peceta i śmiga!
